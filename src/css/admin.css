@@ -1,0 +1,26 @@
+th,td {
+    vertical-align: middle;
+    font-size: 1.5rem;
+  }
+.admin-select {
+  display: inline;
+  width: auto;
+}
+
+@media screen and (max-width: 991px) {
+/*  
+  .date-list-th,.date-list-td  {
+      font-size: 1rem !important;
+  } */
+   
+  .admin-select {
+    font-size: 0.7rem;
+  }
+  .remove {
+    font-size: 0.7rem;
+  }
+  .user-name {
+    font-size: 0.6rem;
+  }
+
+  }

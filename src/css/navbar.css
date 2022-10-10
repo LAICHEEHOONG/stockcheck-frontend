@@ -1,0 +1,50 @@
+.nav-title {
+    transition: 10ms;;
+}
+.nav-title:hover, .nav-title:active {
+    text-shadow: 1px 1px 1px gray;
+    font-size: large;
+    font-weight:bold;
+}
+.volume-icon {
+    font-size: 1.5rem;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.volume-icon:hover, .volume-icon:active {
+    opacity: 1;
+}
+
+.volume-icon-hidden {
+    display: none;
+}
+
+.progress-bar-hidden {
+    display: none;
+}
+
+.flag {
+    width: 30px;
+    margin-left: 10px;
+    margin-top: 3px;
+    /* margin-left: 1%; */
+}
+.flag:hover {
+    width: 35px;
+}
+
+
+@media screen and (max-width: 991px) {
+ 
+    .flag {
+        /* width: 30px; */
+        margin-left: 0;
+        margin-top: 0;
+        /* margin-left: 1%; */
+    }
+ 
+}
+
+/* .flag-link {
+    width: 5%;
+} */

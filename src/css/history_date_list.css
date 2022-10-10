@@ -1,0 +1,23 @@
+.spinner-center {
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.date-list {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 991px) {
+ 
+.date-list-th,.date-list-td  {
+    font-size: 0.8rem;
+}
+
+.time-zone {
+    font-size: 0.6rem;
+}
+ 
+}

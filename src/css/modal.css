@@ -1,0 +1,23 @@
+.order-input {
+    /* margin-bottom: 10px; */
+    margin-top: 10px;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+    text-align: left;
+}
+
+.show-password {
+    margin-top: 10px;
+}
+
+.button-loading {
+    margin-left: 0.25rem;
+}
+.modal-img {
+    width: 150;
+    height: 150;
+  }

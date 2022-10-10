@@ -1,0 +1,17 @@
+.form-upload {
+    width: 100%;
+    max-width: 430px;
+    padding: 15px;
+    margin: auto;
+    /* margin-top: 5%; */
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+}
+
+.button-loading {
+  margin-left: 0.25rem;
+}
