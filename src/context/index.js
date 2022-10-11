@@ -644,11 +644,37 @@ class MyProvider extends Component {
             })
     }
 
-    checkLoginHandle = (cb) => {
+  checkLoginHandle = (cb) => {
 
-        axios.get('https://stockcheck-backend.onrender.com/api/auth/verify')
+        // axios.get('https://stockcheck-backend.onrender.com/api/auth/verify')
+        //     .then(res => {
+        //         console.log(res.data);
+        //         this.setState({ role: res.data.role, zone: res.data.zone, account: res.data.account, login: res.data.login, sid: res.data.sid });
+
+        //         if (res.data.login === false || res.data.role === 'newbie') {
+        //             this.logoutHandle();
+        //             cb();
+        //         }
+        //         this.checkExistingZoneDataHandle(res.data.zone);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+
+        let cookieName = 'auth';
+        let cookieToken;
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        cookieToken = getCookie(cookieName);
+
+        axios.post('https://stockcheck-backend.onrender.com/api/auth/verify', { cookieName, cookieToken })
             .then(res => {
-                // console.log(res.data);
+                console.log(res.data);
                 this.setState({ role: res.data.role, zone: res.data.zone, account: res.data.account, login: res.data.login, sid: res.data.sid });
 
                 if (res.data.login === false || res.data.role === 'newbie') {
@@ -693,14 +719,18 @@ class MyProvider extends Component {
 
 
 
-    loginHandle = (sid, password) => {
+     loginHandle = (sid, password) => {
         this.setState({ loginSpinner: true, loginMessage: 'Loading...' })
         axios.post('https://stockcheck-backend.onrender.com/api/auth/login', { sid, password })
             .then(res => {
                 this.setState({ loginSpinner: false })
-                // console.log(res.data);
+                console.log(res.data);
                 let message = res.data.message;
                 let role = res.data.role;
+
+                let nameCookie = res.data.cookie_.name;
+                let tokenCookie = res.data.cookie_.token;
+                document.cookie = `${nameCookie}=${tokenCookie}`;
 
                 if (message === 'login failed') {
                     this.setState({ loginMessage: `We couldn't find an account matching`, loginImg: blurImage, removeId: '', navigateToAdmin: false })
@@ -713,6 +743,9 @@ class MyProvider extends Component {
                         this.setState({ loginMessage: 'Login', loginImg: hopeImage });
                     }, 4000)
                 } else if (role === 'user' || role === 'admin') {
+
+
+
                     if (this.state.removeId !== '' && role === 'admin') {
                         this.removeUserHandle();
                         this.setState({ removeId: '', navigateToAdmin: true });
