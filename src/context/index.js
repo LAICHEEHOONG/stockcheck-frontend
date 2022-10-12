@@ -728,9 +728,11 @@ class MyProvider extends Component {
                 let message = res.data.message;
                 let role = res.data.role;
 
-                let nameCookie = res.data.cookie_.name;
-                let tokenCookie = res.data.cookie_.token;
-                document.cookie = `${nameCookie}=${tokenCookie}`;
+                if(message === 'login success') {
+                    let nameCookie = res.data.cookie_.name;
+                    let tokenCookie = res.data.cookie_.token;
+                    document.cookie = `${nameCookie}=${tokenCookie}`;
+                }
 
                 if (message === 'login failed') {
                     this.setState({ loginMessage: `We couldn't find an account matching`, loginImg: blurImage, removeId: '', navigateToAdmin: false })
