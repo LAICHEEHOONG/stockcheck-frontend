@@ -142,7 +142,7 @@ class MyProvider extends Component {
 
     findSingleHistoryDataHandle = () => {
         this.setState({navbarSpinner: true})
-        axios.post('https://stockcheck-backend.onrender.com/api/history/singleData', { zone: this.state.zone, id: this.state.historySingleId })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/history/singleData', { zone: this.state.zone, id: this.state.historySingleId })
             .then(res => {
                 // console.log(res.data)
                 this.setState({ historySingleData: res.data.historySingleData.data[0].stock, historySingleDate: res.data.historySingleData.date });
@@ -172,7 +172,7 @@ class MyProvider extends Component {
                 this.getZoneHistoryHandle();
             }, 1000)
         } else {
-            axios.post('https://stockcheck-backend.onrender.com/api/history', { zone: this.state.zone })
+            axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/history', { zone: this.state.zone })
                 .then(res => {
                     // console.log(res.data);
                     this.setState({ historyData: res.data.historyData });
@@ -214,7 +214,7 @@ class MyProvider extends Component {
         let date = new Date().toString();
         let zone = this.state.zone;
 
-        axios.post('https://stockcheck-backend.onrender.com/api/upload/save', { time, date, zone })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/upload/save', { time, date, zone })
             .then(res => {
                 this.setState({ uploadStatus: true })
             })
@@ -345,7 +345,7 @@ class MyProvider extends Component {
             this.setState({ inputSpinner: true });
         }
 
-        axios.post('https://stockcheck-backend.onrender.com/api/input', { item: this.state.inputItem, qty: qty, sid: this.state.sid, account: this.state.account })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/input', { item: this.state.inputItem, qty: qty, sid: this.state.sid, account: this.state.account })
             .then(res => {
                 // console.log(res.data);
 
@@ -420,7 +420,7 @@ class MyProvider extends Component {
         if (filterSameEan(ean) === undefined) {
 
             let zone = this.state.zone;
-            axios.patch('https://stockcheck-backend.onrender.com/api/list/edit', { ean, product, found, zone })
+            axios.patch('https://earnest-reactor-366002.et.r.appspot.com/api/list/edit', { ean, product, found, zone })
                 .then(res => {
                     // console.log(res.data);
                     this.setState({ navbarSpinner: false });
@@ -463,7 +463,7 @@ class MyProvider extends Component {
 
 
         let product = this.state.selectedProduct;
-        axios.post('https://stockcheck-backend.onrender.com/api/list/edit', { product, qty, resetQty, account, sid })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/list/edit', { product, qty, resetQty, account, sid })
             .then(res => {
                 // console.log(res.data);
                 this.setState({ checkBoxEdit: false });
@@ -497,7 +497,7 @@ class MyProvider extends Component {
         this.setState({ navbarSpinner: true });
 
 
-        axios.post('https://stockcheck-backend.onrender.com/api/list', { zone: this.state.zone })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/list', { zone: this.state.zone })
             .then(res => {
                 this.setState({ stockData: res.data.stockData.stock, getErrTimes: 0 })
             })
@@ -528,7 +528,7 @@ class MyProvider extends Component {
     }
 
     checkExistingZoneDataHandle = (zone) => {
-        axios.post('https://stockcheck-backend.onrender.com/api/upload/findData', { zone })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/upload/findData', { zone })
             .then(res => {
                 if (res.data.zoneData.length === 0) {
                     this.setState({ uploadStatus: true });
@@ -542,7 +542,7 @@ class MyProvider extends Component {
 
     submitFileHandle = (formData) => {
 
-        axios.post('https://stockcheck-backend.onrender.com/api/upload', formData, {
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/upload', formData, {
             onUploadProgress: ProgressEvent => {
                 this.setState({ uploadPercentage: parseInt(Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)) })
             }
@@ -600,7 +600,7 @@ class MyProvider extends Component {
     }
 
     removeUserHandle = () => {
-        axios.delete('https://stockcheck-backend.onrender.com/api/auth/admin', { data: { id: this.state.removeId } })
+        axios.delete('https://earnest-reactor-366002.et.r.appspot.com/api/auth/admin', { data: { id: this.state.removeId } })
             .then(res => {
                 console.log(res.data);
             })
@@ -610,7 +610,7 @@ class MyProvider extends Component {
     }
 
     updateZoneNRoleHandle = (id, zone, role) => {
-        axios.patch('https://stockcheck-backend.onrender.com/api/auth/admin', { id, zone, role })
+        axios.patch('https://earnest-reactor-366002.et.r.appspot.com/api/auth/admin', { id, zone, role })
             .then(res => {
                 this.checkLoginHandle();
                 this.calculateStockDataHandle();
@@ -626,7 +626,7 @@ class MyProvider extends Component {
 
     getAllUsersHandle = () => {
         // console.log('getAllUsersHandle');
-        axios.get('https://stockcheck-backend.onrender.com/api/auth/admin')
+        axios.get('https://earnest-reactor-366002.et.r.appspot.com/api/auth/admin')
             .then(res => {
                 // console.log(res.data);
                 this.setState({ allUsers: res.data });
@@ -672,7 +672,7 @@ class MyProvider extends Component {
 
         cookieToken = getCookie(cookieName);
 
-        axios.post('https://stockcheck-backend.onrender.com/api/auth/verify', { cookieName, cookieToken })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/auth/verify', { cookieName, cookieToken })
             .then(res => {
                 console.log(res.data);
                 this.setState({ role: res.data.role, zone: res.data.zone, account: res.data.account, login: res.data.login, sid: res.data.sid });
@@ -690,7 +690,7 @@ class MyProvider extends Component {
 
     checkAdminLoginHandle = (cb) => {
         // console.log('checkAdminLoginHandle')
-        axios.get('https://stockcheck-backend.onrender.com/api/auth/verify')
+        axios.get('https://earnest-reactor-366002.et.r.appspot.com/api/auth/verify')
             .then(res => {
                 // console.log(res.data);
                 this.setState({ role: res.data.role, zone: res.data.zone, account: res.data.account, login: res.data.login });
@@ -721,7 +721,7 @@ class MyProvider extends Component {
 
      loginHandle = (sid, password) => {
         this.setState({ loginSpinner: true, loginMessage: 'Loading...' })
-        axios.post('https://stockcheck-backend.onrender.com/api/auth/login', { sid, password })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/auth/login', { sid, password })
             .then(res => {
                 this.setState({ loginSpinner: false })
                 console.log(res.data);
@@ -780,7 +780,7 @@ class MyProvider extends Component {
 
     registerHandle = (account, password, sid, zone) => {
         this.setState({ signUpSpinner: true });
-        axios.post('https://stockcheck-backend.onrender.com/api/auth/register', { account, password, sid, zone })
+        axios.post('https://earnest-reactor-366002.et.r.appspot.com/api/auth/register', { account, password, sid, zone })
             .then(res => {
                 // console.log(res.data);
                 this.setState({ signUpSpinner: false });
