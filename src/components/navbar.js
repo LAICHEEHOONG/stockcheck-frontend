@@ -158,7 +158,7 @@ const Navbar = () => {
                         </ul>
 
                         {
-                            state.role === 'admin' && state.listSearchBar && location.pathname === '/list' ?
+                            state.getErrTimes < 10 && state.role === 'admin' && state.listSearchBar && location.pathname === '/list' ?
                                 <button onClick={addItemOn} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-outline-success" type="button">
                                     <div className="bi bi-plus" style={{ 'fontSize': '1rem' }} >Add Item</div>
                                 </button>
