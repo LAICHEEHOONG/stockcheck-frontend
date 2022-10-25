@@ -86,7 +86,9 @@ class MyProvider extends Component {
             wait: new Audio(waitVoice),
             load: new Audio(loadVoice)
         },
-        backendLink: 'https://stockcheck-backend.onrender.com'
+        // backendLink: ''
+        backendLink: 'https://phcc-cloud02.df.r.appspot.com/'
+
 
     }
 
@@ -560,14 +562,32 @@ class MyProvider extends Component {
                     }, 1000)
                     return;
                 }
-                this.setUploadTitleHandle(`${res.data.fileName} upload success 😚.`);
+                if(!res.data.fileName) {
+                    this.setUploadTitleHandle(`Upload Errors...`);
+                    setTimeout(() => {
+                        this.setState({ uploadPercentage: 0 })
+                    }, 1000)
+                    setTimeout(() => {
+                        this.setState({ uploadStatus: true });
+                    }, 5000)
+                } else {
+                    this.setUploadTitleHandle(`${res.data.fileName} upload success 😚.`);
+                    setTimeout(() => {
+                        this.setState({ uploadPercentage: 0 })
+                    }, 1000)
+                    setTimeout(() => {
+                        this.setState({ uploadStatus: false });
+                    }, 5000)
+                }
+               
+
                 // console.log(res.data)
-                setTimeout(() => {
-                    this.setState({ uploadPercentage: 0 })
-                }, 1000)
-                setTimeout(() => {
-                    this.setState({ uploadStatus: false });
-                }, 5000)
+                // setTimeout(() => {
+                //     this.setState({ uploadPercentage: 0 })
+                // }, 1000)
+                // setTimeout(() => {
+                //     this.setState({ uploadStatus: false });
+                // }, 5000)
             })
             // .then(res => {
             //     setTimeout(() => {
@@ -647,21 +667,6 @@ class MyProvider extends Component {
 
   checkLoginHandle = (cb) => {
 
-        // axios.get('https://stockcheck-backend.onrender.com/api/auth/verify')
-        //     .then(res => {
-        //         console.log(res.data);
-        //         this.setState({ role: res.data.role, zone: res.data.zone, account: res.data.account, login: res.data.login, sid: res.data.sid });
-
-        //         if (res.data.login === false || res.data.role === 'newbie') {
-        //             this.logoutHandle();
-        //             cb();
-        //         }
-        //         this.checkExistingZoneDataHandle(res.data.zone);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
-
         let cookieName = 'auth';
         let cookieToken;
 
@@ -686,6 +691,8 @@ class MyProvider extends Component {
             })
             .catch(err => {
                 console.log(err);
+                this.logoutHandle();
+                cb();
             })
     }
 
